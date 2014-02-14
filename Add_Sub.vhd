@@ -20,19 +20,12 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx primitives in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity Add_Sub is
     Port ( A : in  STD_LOGIC_VECTOR (3 downto 0);
            B : in  STD_LOGIC_VECTOR (3 downto 0);
 			  CIN : in STD_LOGIC;
+			  BTN : in STD_LOGIC;
            SUM : out  STD_LOGIC_VECTOR (3 downto 0);
 			  COUT : out STD_LOGIC);
 end Add_Sub;
@@ -47,38 +40,37 @@ component Full_Adder is
            COUT : out  STD_LOGIC);
 end component Full_Adder;
 
-signal C0,C1,C2,C3,BTN: STD_LOGIC;
-
+signal C0,C1,C2,C3: STD_LOGIC;
+signal NegB : std_logic_vector(3 downto 0);
 begin
 
---C0 <= '0' when BTN = '0'
---        else '1';
---B <= B when C0 <= '0' else not B;
+NegB <= Not B when BTN = '1' else B;
+C0 <='0' when BTN = '0' else '1';
 
 Bit0: component Full_Adder
    port map (A => A(0),
-	 	       B => B(0),
+	 	       B => NegB(0),
 				 CIN => C0,
 				 SUM => SUM(0),
 				 COUT => C1);
 
 Bit1:component Full_Adder
    port map (A => A(1),
-	 	       B => B(1),
+	 	       B => NegB(1),
 				 CIN => C1,
 				 SUM => SUM(1),
 				 COUT => C2);
 				 
 Bit2:component Full_Adder
    port map (A => A(2),
-	 	       B => B(2),
+	 	       B => NegB(2),
 				 CIN => C2,
 				 SUM => SUM(2),
 				 COUT => C3);
 				 
-Bit3:		component Full_Adder
+Bit3:	component Full_Adder
    port map (A => A(3),
-	 	       B => B(3),
+	 	       B => NegB(3),
 				 CIN => C3,
 				 SUM => SUM(3),
 				 COUT => COUT);		 

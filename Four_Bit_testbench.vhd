@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
--- Company: 
--- Engineer:
+-- Company: USAFA ECE281
+-- Engineer: Nolan Mallory
 --
 -- Create Date:   17:13:02 02/10/2014
 -- Design Name:   
