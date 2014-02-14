@@ -16,6 +16,7 @@ Lab2
 
 [logo3]: /Full_Adder_Sim.JPG
 
+#Lab
 ###4 Bit Schematic
 ![alt text](http://cpuville.com/images/adder_10.jpg)
 
